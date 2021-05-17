@@ -8,16 +8,21 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/user', methods=['POST'])
+@app.route('/user', methods=['GET', 'POST'])
 def userLogin():
-    user = request.get_json()  # json 데이터를 받아옴
-    return jsonify(user)  # 받아온 데이터를 다시 전송
+    if request.method == "GET":
+        # do something
+        pass
+    elif request.method == "POST":
+        # do something
+        pass
 
 
+# Spring의 @PathVariable 사용법
 @app.route('/env/<language>')
 def environments(language):
     return jsonify({"language": language})
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
