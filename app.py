@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -8,9 +8,15 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/user')
-def hello_word():
-    return 'Hello user world'
+@app.route('/user', methods=['POST'])
+def userLogin():
+    user = request.get_json()  # json 데이터를 받아옴
+    return jsonify(user)  # 받아온 데이터를 다시 전송
+
+
+@app.route('/env/<language>')
+def environments(language):
+    return jsonify({"language": language})
 
 
 if __name__ == '__main__':
